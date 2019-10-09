@@ -2,6 +2,29 @@ import React, { Component } from 'react';
 import { View, Text, Button,StyleSheet} from 'react-native';
 export class Setting extends Component
 {
+//    static navigationOptions = {
+//        title:'Detail',
+//    };
+
+static navigationOptions = ({navigation}) => {
+    return {
+     title: navigation.getParam('otherParam','default_value'),
+     headerStyle:{
+         backgroundColor:'white',
+     },
+    // headerTintColor:'black',
+    headerTitleStyle:{
+        fontWeight: 'bold',
+        fontSize: 20,
+        fontStyle: 'normal',
+        color:'red',
+    }
+
+   
+ 
+    }
+};
+
 render(){
     const { navigation } = this.props;
     return(
@@ -20,6 +43,7 @@ render(){
      <Button title='Back to home' onPress={() => this.props.navigation.navigate('HomeScreen')}/>
     {/* <Button title='go to setting again!' onPress={() => this.props.navigation.push('SettingScreen')}/>
     <Button title='go back' onPress={() => this.props.navigation.goBack()}/> */}
+     <Button title='update title ' onPress={() => this.props.navigation.setParams({otherParam:'updated'})}/>
     </View>   
 )
 
