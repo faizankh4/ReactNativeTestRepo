@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text ,StyleSheet,Button,Image} from 'react-native';
+import { View, Text ,StyleSheet,Button,Image,Alert,} from 'react-native';
 
 class LogoTitle extends React.Component
 {
@@ -19,31 +19,61 @@ static navigationOptions = ({ navigation }) => {
       headerTitle: <LogoTitle />,
       headerRight: (
         <Button
-          onPress={navigation.getParam('increaseCount')}
-          title="+1"
+          onPress={this._onPressButtonCall}
+          title='button press'
           color="red"
-        />
+          />
+        
       ),
+      
     };
   };
   
  
-  componentWillMount(){
+  componentDidMount(){
 
    this.props.navigation.setParams({inreaseValue:this._increaseCount})
- 
+  
+   
+   console.log('did mount call')
+  
   }
  
+  componentWillMount(){
+
+    console.log('will mount call')
+  
+  }
+  
+  
+  componentDidUnmount(){
+    console.log('will didmount call')
+  }
+  
+  componentWillUnmount(){
+    console.log('will unmount call')
+  }
+  
   state = {
     count :0,
   };
 
+  _onPressButtonCall() {
+    Alert.alert('method called');
+  }
+
+
+  
   _increaseCount = () =>{
     this.setState({count:this.state.count +1});
-  
+    console.log('Hi from React increase');
   };
   
   
+  newMethod() {
+    return 'will unmount call';
+  }
+
   render() {
     const didBlurSubscription = this.props.navigation.addListener(
       'didBlur',
@@ -56,6 +86,7 @@ static navigationOptions = ({ navigation }) => {
         <Text>Home screen!</Text>
         <Text> Count:{this.state.count} </Text>
         <Button title='Add some friends' onPress={() => this.props.navigation.navigate('SettingScreen',{itemid:86,otherParam:'test string',})}/>
+        <Button title='Add some friends2' onPress={this._onPressButtonCall}/>
         <Button title='open third screen' onPress={() => this.props.navigation.navigate({routeName:'ThirdScreen',key:'main0',params:{name:'Detail'}})}/>
       </View>
     )
