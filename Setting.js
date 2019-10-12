@@ -8,7 +8,7 @@ export class Setting extends Component
 
 static navigationOptions = ({navigation}) => {
     return {
-     title: navigation.getParam('otherParam','default_value'),
+     title: navigation.getParam('otherParamValue','default_value'),
      headerStyle:{
          backgroundColor:'white',
      },
@@ -43,7 +43,7 @@ render(){
      <Button title='Back to home' onPress={() => this.props.navigation.navigate('HomeScreen')}/>
     {/* <Button title='go to setting again!' onPress={() => this.props.navigation.push('SettingScreen')}/>
     <Button title='go back' onPress={() => this.props.navigation.goBack()}/> */}
-     <Button title='update title ' onPress={() => this.props.navigation.setParams({otherParam:'updated'})}/>
+     <Button title='update title ' onPress={() => this.props.navigation.setParams({otherParamValue:'updated'})}/>
     </View>   
 )
 

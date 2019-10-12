@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text ,StyleSheet,Button,Image,Alert,} from 'react-native';
+import { View, Text ,StyleSheet,Button,Image,Alert,Platform} from 'react-native';
+//import { platform } from 'os';
 
 class LogoTitle extends React.Component
 {
@@ -15,24 +16,30 @@ class LogoTitle extends React.Component
 export class Home extends Component {
 
 static navigationOptions = ({ navigation }) => {
-    return {
+  const p = navigation.state.params || {};
+  return {
       headerTitle: <LogoTitle />,
       headerRight: (
         <Button
-          onPress={this._onPressButtonCall}
-          title='button press'
+          onPress={p.inreaseValue}
+          title={navigation.getParam('itemid','default')}
           color="red"
           />
         
       ),
-      
+     headerLeft:(
+       <Button onPress={()=> navigation.navigate('MyModal')}
+               title='info'
+               color={Platform.OS === 'ios'? 'red' : null}
+       />
+     ), 
     };
   };
   
  
   componentDidMount(){
 
-   this.props.navigation.setParams({inreaseValue:this._increaseCount})
+   this.props.navigation.setParams({inreaseValue:this._increaseCount,itemid:'36'})
   
    
    console.log('did mount call')
@@ -74,7 +81,12 @@ static navigationOptions = ({ navigation }) => {
     return 'will unmount call';
   }
 
+  
+ 
   render() {
+   const {navigation} = this.props;
+   const p = navigation.state.params || {};
+   
     const didBlurSubscription = this.props.navigation.addListener(
       'didBlur',
       payload => {
@@ -85,6 +97,7 @@ static navigationOptions = ({ navigation }) => {
       <View style={styles.container}>
         <Text>Home screen!</Text>
         <Text> Count:{this.state.count} </Text>
+         <Text>{p.itemid}</Text> 
         <Button title='Add some friends' onPress={() => this.props.navigation.navigate('SettingScreen',{itemid:86,otherParam:'test string',})}/>
         <Button title='Add some friends2' onPress={this._onPressButtonCall}/>
         <Button title='open third screen' onPress={() => this.props.navigation.navigate({routeName:'ThirdScreen',key:'main0',params:{name:'Detail'}})}/>
