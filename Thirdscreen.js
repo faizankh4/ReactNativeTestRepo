@@ -16,7 +16,7 @@ render(){
     <View style={styles.container}>
      <Text> third screen! </Text>
      <Text> name is :{this.props.navigation.state.params.name}</Text>
-     <Button title='Back to home' onPress={() => this.props.navigation.navigate('HomeScreen')}/>
+     <Button title='Back to homescreen' onPress={() => this.props.navigation.navigate('HomeScreen')}/>
     {/* <Button title='go to setting again!' onPress={() => this.props.navigation.push('SettingScreen')}/>
     <Button title='go back' onPress={() => this.props.navigation.goBack()}/> */}
     <Button title='update the title' onPress={() => this.props.navigation.setState({params:{name:'Detail'}})}/>
