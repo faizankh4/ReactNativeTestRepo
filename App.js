@@ -9,8 +9,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import AppNavigator from './AppNavigator';
-
-
+import AppNavigatorTabBar from './TabBarClasses/AppnevigatorTabBar'
+import SplashScreen from 'react-native-splash-screen';
 export default class App extends React.Component {
   constructor(props) {
     super(props)
@@ -43,10 +43,14 @@ export default class App extends React.Component {
     })
   }
 
-  
+   componentDidMount (){
+    SplashScreen.hide();
+   }
+ 
+ 
   render() {
     return (
-     <AppNavigator/>
+     <AppNavigatorTabBar/>
     //  screenProps={ {
     //   currentFriends: this.state.currentFriends,
     //   possibleFriends: this.state.possibleFriends,
