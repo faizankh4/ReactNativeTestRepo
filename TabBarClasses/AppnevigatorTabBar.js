@@ -8,17 +8,18 @@ import HomeScreen from './HomeTabbar';
 import Detailscreen from './DetailTabBar';
 import SettingsScreen from './SettingTabbar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Test1Screen from './../TestClasses/Test1'
 const HomeStack = createStackNavigator({
  Home:{screen:HomeScreen},
  Detail:{screen:Detailscreen},
-
+ Test1:{screen:Test1Screen},
 
 });
 
 const SettingStack = createStackNavigator({
   Settings:{screen:SettingsScreen},
   Detail:{screen:Detailscreen},
-
+  
 });
 
 export default createAppContainer(createBottomTabNavigator(
@@ -49,8 +50,10 @@ export default createAppContainer(createBottomTabNavigator(
         activeTintColor: 'red',
         inactiveTintColor: 'blue',
       },
-     
-  }
+      animationEnabled: false,
+      swipeEnabled: false,
+  
+    }
    
 
 

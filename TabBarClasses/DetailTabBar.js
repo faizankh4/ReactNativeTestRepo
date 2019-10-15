@@ -21,6 +21,7 @@ class DetailsScreen extends React.Component {
           <Text>Details!</Text>
           <Text>{param.otherparam}</Text>
           <Button title='goBack' onPress={() => navigation.goBack()}/>
+          <Button title='goToTestScreen' onPress={() => navigation.navigate('Test1')}/>
         </View>
       );
     }
