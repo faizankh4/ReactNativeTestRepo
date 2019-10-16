@@ -9,11 +9,12 @@ import Detailscreen from './DetailTabBar';
 import SettingsScreen from './SettingTabbar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Test1Screen from './../TestClasses/Test1'
+import inputScreen from './InputTabbar'
 const HomeStack = createStackNavigator({
  Home:{screen:HomeScreen},
  Detail:{screen:Detailscreen},
  Test1:{screen:Test1Screen},
-
+ inputscreen:{screen:inputScreen},
 });
 
 const SettingStack = createStackNavigator({
