@@ -23,6 +23,7 @@ class DetailsScreen extends React.Component {
           <Button title='goBack' onPress={() => navigation.goBack()}/>
           <Button title='goToTestScreen' onPress={() => navigation.navigate('Test1')}/>
           <Button title='goToTestInputscreen' onPress={() => navigation.navigate('inputscreen')}/>
+          <Button title='goToScrollBar' onPress={() => navigation.navigate('scrollBarScreen')}/>
         </View>
       );
     }

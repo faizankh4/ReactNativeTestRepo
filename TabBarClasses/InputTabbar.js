@@ -61,7 +61,10 @@ export default InputTabbar
 
 const styles = StyleSheet.create({
  container:{
-     paddingTop:23,
+    paddingTop:23,
+     backgroundColor:'white',
+     flex:1,
+     flexDirection:'column'
  },
  input:{
    margin:15,
