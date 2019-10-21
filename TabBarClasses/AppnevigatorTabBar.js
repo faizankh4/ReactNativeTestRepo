@@ -12,6 +12,7 @@ import Test1Screen from './../TestClasses/Test1'
 import inputScreen from './InputTabbar'
 import scrollBarScreen from './ScrollBar'
 import FlatListScreen from './FlatListscreen'
+import ListDetailBarScreen from './ListDetailBar' 
 const HomeStack = createStackNavigator({
  Home:{screen:HomeScreen},
  Detail:{screen:Detailscreen},
@@ -19,6 +20,8 @@ const HomeStack = createStackNavigator({
  inputscreen:{screen:inputScreen},
  scrollBarScreen:{screen:scrollBarScreen},
  FlatListScreen:{screen:FlatListScreen},
+ ListDetailBarScreen:{screen:ListDetailBarScreen},
+
 });
 
 const SettingStack = createStackNavigator({
