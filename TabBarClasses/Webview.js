@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Button,StyleSheet,WebView,Picker} from 'react-native';
+import { View, Text, Button,StyleSheet,WebView,Picker,StatusBar} from 'react-native';
 
 export class webviewClass extends Component {
   
@@ -17,7 +17,7 @@ export class webviewClass extends Component {
     {
        return (
         <View style={styles.container}>  
-        <Text style={styles.textStyle}>PickerExample</Text>  
+        {/* <Text style={styles.textStyle}>PickerExample</Text>  
         <Picker style={styles.pickerStyle}  
                 selectedValue={this.state.lamguage}  
                 onValueChange={(itemValue, itemIndex) =>
@@ -25,13 +25,20 @@ export class webviewClass extends Component {
                   }>
                  
                 
-                    {/* onValueChange={this.updateUser} >  */}
+                   
              
             <Picker.Item label="Java" value="java" />  
             <Picker.Item label="JavaScript" value="js" />  
             <Picker.Item label="React Native" value="rn" />  
         </Picker>  
-        <Text style={styles.textStyle}> {"Index ="+this.state.language}</Text>  
+        <Text style={styles.textStyle}> {"Index ="+this.state.language}</Text>   */}
+         <StatusBar  
+                    backgroundColor = "#b3e6ff"  
+                    barStyle = "dark-content"   
+                    hidden = {false}    
+                    translucent = {true}  
+                />  
+   
     </View>  
       
         )
