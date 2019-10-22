@@ -13,6 +13,10 @@ class SettingsScreen extends React.Component {
             title="Go to Details"
             onPress={() => this.props.navigation.navigate('Detail')}
           />
+           <Button
+            title="Go to WebView"
+            onPress={() => this.props.navigation.navigate('WebviewScreen')}
+          />
         </View>
       );
     }

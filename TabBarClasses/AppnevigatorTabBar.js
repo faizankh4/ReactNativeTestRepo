@@ -13,6 +13,8 @@ import inputScreen from './InputTabbar'
 import scrollBarScreen from './ScrollBar'
 import FlatListScreen from './FlatListscreen'
 import ListDetailBarScreen from './ListDetailBar' 
+import WebviewScreen from './Webview'
+
 const HomeStack = createStackNavigator({
  Home:{screen:HomeScreen},
  Detail:{screen:Detailscreen},
@@ -27,7 +29,7 @@ const HomeStack = createStackNavigator({
 const SettingStack = createStackNavigator({
   Settings:{screen:SettingsScreen},
   Detail:{screen:Detailscreen},
-  
+  WebviewScreen:{screen:WebviewScreen},
 });
 
 export default createAppContainer(createBottomTabNavigator(

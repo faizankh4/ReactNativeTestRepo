@@ -1,11 +1,25 @@
 import React from 'react';
-import {Text,StyleSheet,View,SafeAreaView,FlatList,Alert,Image,SearchBar,ActivityIndicator} from 'react-native'
+import {Text,StyleSheet,View,SafeAreaView,FlatList,Alert,Image,SearchBar,ActivityIndicator,Button,Platform} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
  export class FlatListScreen extends React.Component
  {
-    
-    constructor(props){
+     static navigationOptions = ({navigation}) => {
+
+     const params = navigation.state.params || {};
+      return{
+       headerTitle:'RandomUser',
+       headerRight:(
+         <Button title = 'Refresh'
+                  onPress = {params.refreshList}
+                  color = {Platform.OS === 'ios' ? 'red' : 'green'}
+                  />
+                 
+       ),
+     
+      };
+   };
+   constructor(props){
      super(props)
      this.state = {
       loading:false,
@@ -14,15 +28,25 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
       seed:1,
       error:null,
       refreshing:false,
-      
+      showIndicator:true,
 
      };
     }
    
    componentDidMount(){
      this.makeRemoteRequest();
+     this.props.navigation.setParams({refreshList:this.refreshListView})
+  
    }
    
+    
+    refreshListView = () =>
+     {
+        this.setState({showIndicator:true});
+        this.makeRemoteRequest();
+
+     }
+  
    makeRemoteRequest = () =>
    {
       const {page,seed} = this.state;
@@ -32,7 +56,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
       .then(res => res.json())
       .then(res =>{
         this.setState({
-          data: page === 1 ? res.results : [...this.state.data,...res.results],error:res.error || null, loading:false,refreshing:false
+          data: page === 1 ? res.results : [...this.state.data,...res.results],error:res.error || null, loading:false,refreshing:false,showIndicator:false
         
          });
       
@@ -92,6 +116,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
    };
  
 render(){
+  
+    if(this.state.showIndicator === false)
+     {
+  
    return(
     <View style = {styles.container}>
     
@@ -125,7 +153,9 @@ render(){
         />
      </View>    
      <View style={{flex:1.0,backgroundColor:'white',paddingLeft:5}}>
-       <TouchableOpacity onPress = {() => this.getlistItem(item)}>
+     
+     <TouchableOpacity onPress = {() => this.getlistItem(item)}>
+     
       
         <Text style = {{color:'black',fontSize:12,fontStyle:'normal',fontWeight:'bold',marginTop:5}}>{item.name.title + ' ' + item.name.first + ' ' + item.name.last}</Text> 
         <Text style = {{color:'grey',fontSize:10,fontStyle:'normal',fontWeight:'normal',marginTop:5}}>{item.email}</Text>  
@@ -147,8 +177,20 @@ render(){
     </FlatList>   
     </View>
    );
+     }
+   else{
+       return(
+      
+      <View style = {{flex:1,justifyContent:'center',alignItems:'center'}}>
+       <ActivityIndicator size = 'large' color = 'red'/>
+     
+      </View>
+     );
+  
+   }
 
-}
+
+ }
 
 
 
