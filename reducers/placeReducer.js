@@ -15,9 +15,11 @@ const placeReducer = (state = intialState,action) => {
       ...state,
          places:state.places.concat({
            key:Math.random(),
-           value:action.payLoad, 
-         })
-   
+           value:action.payload,
+         },
+         
+         )
+       
      };
      default:
          return state;
@@ -25,5 +27,12 @@ const placeReducer = (state = intialState,action) => {
   }
 
 }
+
+displayValueOnLog = (dict) =>
+{
+  console.log('call display');
+
+}
+
 
 export default placeReducer

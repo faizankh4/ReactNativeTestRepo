@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet,View,TextInput,Button,FlatList} from 'react-native';
+import {StyleSheet,View,TextInput,Button,FlatList,Text} from 'react-native';
 import Listitem from './components/Listitem'
 import {connect} from  'react-redux'
 import {addPlace} from './action/place'
@@ -42,11 +42,13 @@ placeOutput = () =>
     <FlatList style = { styles.listContainer }
       data = { this.props.places }
       keyExtractor={(item, index) => index.toString()}
-      renderItem = { info => (
+      renderItem = {({item})=> (
         <Listitem 
-        placeName={info.item.value}
+        placeName={item.value}
         />
-      )}
+      // <Text>{info.item.value}</Text>
+      
+        )}
     />
   )
 }
