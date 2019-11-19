@@ -3,6 +3,7 @@ import {StyleSheet,View,TextInput,Button,FlatList,Text} from 'react-native';
 import Listitem from './components/Listitem'
 import {connect} from  'react-redux'
 import {addPlace} from './action/place'
+import SplashScreen from 'react-native-splash-screen';
 export class AppRouter extends React.Component 
 {
    
@@ -12,8 +13,12 @@ state = {
 
 }
 
+componentDidMount (){
+  SplashScreen.hide();
+ }
+ 
 
- placementSubmittHandler = () =>
+placementSubmittHandler = () =>
 {
  console.log("submitted");
 

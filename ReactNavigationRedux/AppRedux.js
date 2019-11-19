@@ -6,7 +6,7 @@ import StaticCounter from './StaticCounter'
 import { Button, Text, View, StyleSheet } from 'react-native';
 import { Provider, connect } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
-
+import SplashScreen from 'react-native-splash-screen';
 // Connect the screens to Redux
 let CounterContainer = connect(state => ({ count1: state.count1,value:'test' }))(Counter);
 let StaticCounterContainer = connect(state => ({ count1: state.count1,value:'test2'}))(
@@ -43,6 +43,11 @@ function counter(state, action) {
  
  
   export default class App extends React.Component {
+    componentDidMount (){
+      SplashScreen.hide();
+     }
+    
+    
     render() {
       return (
         <Provider store={store}>
