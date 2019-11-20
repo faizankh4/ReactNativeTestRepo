@@ -8,6 +8,7 @@ import { Provider, connect } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import SplashScreen from 'react-native-splash-screen';
 // Connect the screens to Redux
+
 let CounterContainer = connect(state => ({ count1: state.count1,value:'test' }))(Counter);
 let StaticCounterContainer = connect(state => ({ count1: state.count1,value:'test2'}))(
   StaticCounter
@@ -39,6 +40,7 @@ function counter(state, action) {
   
   // A very simple store
   let store = createStore(combineReducers({ count1: counter }));
+  //let store = createStore(combineReducers());
  
  
  

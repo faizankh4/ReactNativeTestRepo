@@ -11,6 +11,7 @@ export class StaticCounter extends Component
           <View style={styles.container}>
             {/* <Text style={styles.paragraph}>{this.props.value}</Text> */}
             <Text style={styles.paragraph}>{this.props.count1}</Text>
+            <Text>{this.props.value}</Text>
           </View>
         );
       }

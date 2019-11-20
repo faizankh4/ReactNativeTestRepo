@@ -14,6 +14,7 @@ import scrollBarScreen from './ScrollBar'
 import FlatListScreen from './FlatListscreen'
 import ListDetailBarScreen from './ListDetailBar' 
 import WebviewScreen from './Webview'
+import Addsubview from'./Addsubview'
 
 const HomeStack = createStackNavigator({
  Home:{screen:HomeScreen},
@@ -23,7 +24,9 @@ const HomeStack = createStackNavigator({
  scrollBarScreen:{screen:scrollBarScreen},
  FlatListScreen:{screen:FlatListScreen},
  ListDetailBarScreen:{screen:ListDetailBarScreen},
-
+ AddsubviewScreen:{
+   screen:Addsubview 
+ },
 });
 
 const SettingStack = createStackNavigator({
