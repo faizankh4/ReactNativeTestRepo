@@ -1,6 +1,7 @@
 import React,{Componenet} from 'react';
-import {Text,TextInput,View,TouchableOpacity,StyleSheet,Alert,TouchableHighlight} from 'react-native';
+import {Text,TextInput,View,TouchableOpacity,StyleSheet,Alert,TouchableHighlight,FlatList} from 'react-native';
 import renderif from './renderif'
+
 export class AddSubview extends React.Component
 {
     static navigationOptions = {
@@ -11,6 +12,17 @@ export class AddSubview extends React.Component
         super(props)
         this.state = {
          status:true,
+         listItem:[{key:'1'},
+                   {key:'2'},
+                   {key:'3'},
+                   {key:'4'},
+                   {key:'5'},
+                   {key:'6'},
+                   {key:'7'},
+                   {key:'8'},
+                  ],
+            value:'0',     
+       
         };
        }
     
@@ -21,6 +33,27 @@ export class AddSubview extends React.Component
          console.log('call')
     }
    
+    removeSubView = (Item) =>
+    {
+      this.setState({status:false,value:Item.key})
+    
+    }
+   
+    renderSeparator = () => {  
+      return (  
+          <View  
+              style={{  
+                  height: 1,  
+                 width: "100%",  
+                  backgroundColor: "#000", 
+                 // marginLeft:'14%',
+              }}  
+          > 
+          </View> 
+      );  
+  };  
+  
+  
     render(){
 
 //     if(this.state.status === true)
@@ -48,15 +81,44 @@ export class AddSubview extends React.Component
 //      } 
 
 return (
-    <View style={styles.container}>
+     <View style={styles.container}>
+     <View style = {{backgroundColor:'red',width:'100%',height:100,}} >
+    
+      </View>
+     <Text style={{marginBottom:150}}>{this.state.value}</Text>
+      
      {renderif(this.state.status)(
         <View style = {styles.inputContainer}>
-                        </View> 
+        <FlatList                                                  
+     data = {this.state.listItem}
+     renderItem = {({item}) => <View style={{backgroundColor:'red',marginBottom:0,height:44,flexDirection:'row'}}>
+     
+     
+     <View style = {{flex:1,backgroundColor:'yellow'}}>
+     <TouchableOpacity  onPress = {() => this.removeSubView(item)}
+                        style  = {{backgroundColor:'orange',flex:1,justifyContent:'center',alignItems:'center'}} 
+     >                
+     <Text>{item.key}</Text>
+     </TouchableOpacity>
+    </View>
+    
+     </View>
+     }                         
+
+     
+    ItemSeparatorComponent = {this.renderSeparator}
+    keyExtractor = {item => item.key}
+    horizontal={false}>
+    </FlatList>                
+        
+        
+        </View> 
      )}
 
       {/* <TouchableHighlight onPress={()=>this.addSubview()}>
         <Text> touchme </Text>
       </TouchableHighlight> */}
+      
       <TouchableOpacity onPress = {() => this.addSubview()}>
       <Text>Addsubview</Text>
      </TouchableOpacity>
@@ -77,7 +139,7 @@ const styles = StyleSheet.create(
        container:{
            flex:1,
            flexDirection:'column',
-           justifyContent:'center',
+           justifyContent:'flex-start',
            alignItems:'center',
        },
        inputContainer:{
