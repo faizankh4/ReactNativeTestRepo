@@ -54,7 +54,34 @@ export class AddSubview extends React.Component
   };  
   
   
-    render(){
+  renderSeparatorhorizontol = () => {  
+    return (  
+        <View  
+            style={{  
+                height:'100%',  
+               width:1,  
+                backgroundColor: "#000", 
+               // marginLeft:'14%',
+            }}  
+        > 
+        </View> 
+    );  
+};  
+  
+_renderItem = ({ item }) => {
+  return (
+    <View
+      style={{
+        padding: 16,
+        backgroundColor: 'yellow',
+        width: '100%',
+        height: 100,
+      }}>
+      <Text>{item.key}</Text>
+    </View>
+  );
+};
+  render(){
 
 //     if(this.state.status === true)
 //     {
@@ -82,14 +109,31 @@ export class AddSubview extends React.Component
 
 return (
      <View style={styles.container}>
-     <View style = {{backgroundColor:'red',width:'100%',height:100,}} >
-    
+     <View style = {{backgroundColor:'red',width:'100%',height:100,marginTop:20}} >
+     <FlatList                                                  
+     data = {[{key:'1'},
+     {key:'2'},
+     {key:'3'},
+     {key:'4'},
+     ]}
+    //  renderItem = {({item}) => <View style={{backgroundColor:'green',marginBottom:0,width:100,height:100}}>
+     
+    //  </View>
+    //  }                         
+    renderItem={this._renderItem}
+     
+   // ItemSeparatorComponent = {this.renderSeparatorhorizontol}
+   ItemSeparatorComponent={() => <View style={{margin: 4}}/>}
+    keyExtractor = {item => item.key}
+    horizontal={true}>
+    </FlatList>
+     
       </View>
      <Text style={{marginBottom:150}}>{this.state.value}</Text>
       
      {renderif(this.state.status)(
         <View style = {styles.inputContainer}>
-        <FlatList                                                  
+      <FlatList                                                  
      data = {this.state.listItem}
      renderItem = {({item}) => <View style={{backgroundColor:'red',marginBottom:0,height:44,flexDirection:'row'}}>
      

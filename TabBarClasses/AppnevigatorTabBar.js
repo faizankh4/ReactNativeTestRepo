@@ -15,7 +15,7 @@ import FlatListScreen from './FlatListscreen'
 import ListDetailBarScreen from './ListDetailBar' 
 import WebviewScreen from './Webview'
 import Addsubview from'./Addsubview'
-
+import horizontalflatList from './horizontalFlatList'
 const HomeStack = createStackNavigator({
  Home:{screen:HomeScreen},
  Detail:{screen:Detailscreen},
@@ -26,6 +26,9 @@ const HomeStack = createStackNavigator({
  ListDetailBarScreen:{screen:ListDetailBarScreen},
  AddsubviewScreen:{
    screen:Addsubview 
+ },
+ horizontalflatListscreen:{
+   screen:horizontalflatList
  },
 });
 
