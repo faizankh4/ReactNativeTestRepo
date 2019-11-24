@@ -27,6 +27,7 @@ class DetailsScreen extends React.Component {
           <Button title='goToFlatList' onPress={() => navigation.navigate('FlatListScreen')}/>
           <Button title='goToAddsubView' onPress={() => navigation.navigate('AddsubviewScreen')}/>
           <Button title='horizontalflatList' onPress={() => navigation.navigate('horizontalflatListscreen')}/>
+          <Button title = 'GridFlatList' onPress = {() => navigation.navigate('GridFlatListscreen')}/>
         
         </View>
       );

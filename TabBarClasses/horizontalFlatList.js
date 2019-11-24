@@ -107,7 +107,7 @@ export class horizontalFlatList extends React.Component
         return (
           <View style={{ flex: 1,flexDirection:'column',marginTop:Platform.OS === 'ios' ? 34 : 0}}>
            <View style = {{height:150}}>
-            <FlatList style = {{backgroundColor:'black',opacity:0.5}}
+            <FlatList style = {{backgroundColor:'black',opacity:0.5,flex:1}}
                       horizontal = {true}
                       data={horizontalFlatListDataitem}
                     //   renderItem = {({item,index}) =>{
