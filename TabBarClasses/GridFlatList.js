@@ -21,10 +21,18 @@ let noOfElementsInlastRow = (data.length - (noOfFullRows * noCoulmns));
 }
 
 
+ 
+
 
 export class GridFlatList extends React.Component
 {
-   renderItem = ({item,index}) => {
+    showAlert = (item) =>
+    {
+       Alert.alert(`value is ${item.key}`);
+    }
+  
+  
+    renderItem = ({item,index}) => {
     //  if(item.empty === true)
     //  {
     //    return <View style = {styles.item,styles.itemInvisible}/>  
@@ -32,8 +40,13 @@ export class GridFlatList extends React.Component
     
     return(
           <View style={styles.item}>
+            
+            <TouchableOpacity onPress = {()=> this.showAlert(item)}
+                               style = {[styles.item,styles.touchOpacitystyle]}
+                               >
+           
             <Text style = {styles.itemtext}>{item.key}</Text >
-          
+            </TouchableOpacity> 
            </View>    
       );
 
@@ -85,6 +98,10 @@ const styles = StyleSheet.create(
             margin: 1,
             backgroundColor:'#441F35'
             
+        },
+        touchOpacitystyle:{
+          //backgroundColor:'rgba(1,255,0,1.0)',
+          backgroundColor:'transparent',
         },
         itemInvisible:{
             backgroundColor:'transparent'
