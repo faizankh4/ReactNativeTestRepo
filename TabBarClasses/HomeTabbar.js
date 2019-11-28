@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Text, View, Alert, Platform} from 'react-native';
 class HomeScreen extends React.Component {
-  static navigationOptions = ({navigation}) => {
+ /* static navigationOptions = ({navigation}) => {
     return {
      title:'Home',
     headerLeft:(
@@ -12,7 +12,7 @@ class HomeScreen extends React.Component {
     ),
   }
   
- };
+ };*/
  
  _onPressButtonCall() {
   Alert.alert('method called');
