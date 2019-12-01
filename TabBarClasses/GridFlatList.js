@@ -13,7 +13,7 @@ const noOfFullRows = Math.floor(data.length/noCoulmns);
 let noOfElementsInlastRow = (data.length - (noOfFullRows * noCoulmns));
  while(noOfElementsInlastRow !== noCoulmns && noOfElementsInlastRow !== 0)
  {
-     data.push({key:`blank- ${noOfElementsInlastRow}`,empty:true});
+     data.push({key:`blank-${noOfElementsInlastRow}`,empty:true});
      noOfElementsInlastRow = noOfElementsInlastRow +1;
  
 }
