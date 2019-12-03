@@ -22,19 +22,27 @@ import WebviewScreen from './../TabBarClasses/Webview'
 import Addsubview from'./../TabBarClasses/Addsubview'
 import horizontalflatList from './../TabBarClasses/horizontalFlatList'
 import GridFlatList from './../TabBarClasses/GridFlatList'
+import AboutUs from './../TabBarClasses/AboutUs';
+import Services from './../TabBarClasses/Services';
+import loginTababr from './../TabBarClasses/LoginTabbar';
+import Moretabbar from './../TabBarClasses/MoreTabBar';
+import HappinessTabbar from './../TabBarClasses/HappinestabBar';
+import HomeDafzascreen from './../TabBarClasses/HomeDafza';
+
 const HomeStack = createStackNavigator({
- Home:{screen:HomeScreen,
+ Home:{screen:HomeDafzascreen,
   navigationOptions:({navigation}) =>({
     headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+   title:'WELCOME',
     headerStyle:{
-        backgroundColor:'white',
+        backgroundColor:'rgba(15, 48, 72, 1.0)',
     },
    headerTintColor:'black',
    headerTitleStyle:{
-       fontWeight: 'bold',
+       fontWeight: '500',
        fontSize: 20,
-       fontStyle: 'italic',
-       color:'blue',
+       fontStyle: 'normal',
+       color:'white',
    },
   }),
 
@@ -54,6 +62,13 @@ const HomeStack = createStackNavigator({
  GridFlatListscreen:{
   screen:GridFlatList,
  },
+ AboutUsScreen:{
+   screen:AboutUs,
+ },
+ ServicesScreen:{
+   screen:Services,
+ },
+
 },
 {
   initialRouteName:'Home',
@@ -69,37 +84,157 @@ const SettingStack = createStackNavigator({
 });
 
 
+const Loginstack = createStackNavigator({
+  Loginscreen:{screen:loginTababr},
+ 
+});
+
+const MoreStack = createStackNavigator({
+  Moretabbarscreen:{screen:Moretabbar},
+ 
+});
+
+const Happinessstack = createStackNavigator({
+  HappinessTabbarScreen:{screen:HappinessTabbar},
+ 
+});
+
 const Tabs = createBottomTabNavigator(
   {
-    Home1:{screen:HomeStack},
-    Settings1:{screen:SettingStack},  
-},
+    Home:{screen:HomeStack,
+      navigationOptions:({navigation}) =>({
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ focused, tintColor }) => {
+          const image = focused
+          ? require('./../images/BottamBarimages/home_yell.png')
+          : require('./../images/BottamBarimages/home.png')
+          return (
+              <Image
+                  source={image}
+                  style={{height:27, width:23,resizeMode:'contain'}}
+              />
+          )
+  
+        },
+     
+      }
+      
+      ),
+    },
+
+    Reachus:{screen:SettingStack,
+      navigationOptions:({navigation}) =>({
+        tabBarLabel: 'Reach us',
+        tabBarIcon: ({ focused, tintColor }) => {
+          const image = focused
+          ? require('./../images/BottamBarimages/reach_yell.png')
+          : require('./../images/BottamBarimages/reach.png')
+          return (
+              <Image
+                  source={image}
+                  style={{height:27, width:23,resizeMode:'contain'}}
+              />
+          )
+  
+        },
+      }),
+
+    }, Happiness:{screen:Happinessstack,
+      navigationOptions:({navigation}) =>({
+        tabBarLabel: 'Happiness',
+        tabBarIcon: ({ focused, tintColor }) => {
+          const image = focused
+          ? require('./../images/BottamBarimages/HMYellow.png')
+          : require('./../images/BottamBarimages/HMWhite.png')
+          return (
+              <Image
+                  source={image}
+                  style={{height:27, width:23,resizeMode:'contain'}}
+              />
+          )
+  
+        },
+      }),
+
+    }, Login:{screen:Loginstack,
+      navigationOptions:({navigation}) =>({
+        tabBarLabel: 'Login',
+        tabBarIcon: ({ focused, tintColor }) => {
+          const image = focused
+          ? require('./../images/BottamBarimages/login_tab_yell.png')
+          : require('./../images/BottamBarimages/login_tab.png')
+          return (
+              <Image
+                  source={image}
+                  style={{height:27, width:23,resizeMode:'contain'}}
+              />
+          )
+  
+        },
+      }),
+
+    },MorestackTab:{screen:MoreStack,
+      navigationOptions:({navigation}) =>({
+        tabBarLabel: 'More',
+        tabBarIcon: ({ focused, tintColor }) => {
+          const image = focused
+          ? require('./../images/BottamBarimages/activity_yell.png')
+          : require('./../images/BottamBarimages/activity.png')
+          return (
+              <Image
+                  source={image}
+                  style={{height:27, width:23,resizeMode:'contain'}}
+              />
+          )
+  
+        },
+      }),
+
+    }
+  },
  {
-     defaultNavigationOptions:({navigation}) =>({
-      tabBarIcon: ({ focused, tintColor }) => {
-           const { routeName } = navigation.state;
-           let iconName;
-           if (routeName === 'Home1') {
-            // iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-             iconName = `ios-information-circle${focused ? '' : '-outline'}`;
-           } else if (routeName === 'Settings1') {
-             iconName = `ios-options${focused ? '' : '-outline'}`;
-           }
+    //  defaultNavigationOptions:({navigation}) =>({
+    //   tabBarIcon: ({ focused, tintColor }) => {
+    //        const { routeName } = navigation.state;
+    //        let iconName;
+    //        if (routeName === 'Home') {
+    //         // iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+    //          iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+    //        } else if (routeName === 'Reachus') {
+    //          iconName = `ios-options${focused ? '' : '-outline'}`;
+    //        }
    
-           // You can return any component that you like here! We usually use an
-           // icon component from react-native-vector-icons
-           return <Ionicons name={iconName} size={25} color={tintColor} />;
-         },
+    //        // You can return any component that you like here! We usually use an
+    //        // icon component from react-native-vector-icons
+    //        return <Ionicons name={iconName} size={25} color={tintColor}/>;
+    //      },
+
         
   
 
-     }),
+    //  }),
      tabBarOptions: {
-       activeTintColor: 'red',
-       inactiveTintColor: 'blue',
-     },
+       activeTintColor: 'yellow',
+       inactiveTintColor: 'white',
+       style: {
+        backgroundColor: 'rgba(15, 48, 72, 1.0)',
+        // height: 55,
+        // borderTopColor: 'transparent',
+        // borderTopWidth: 1,
+        // paddingRight: 10,
+        // paddingLeft: 10,
+        // borderTopWidth: 1,
+      //  borderTopColor: grayPlaceHolder
+    },
+    labelStyle: {
+      fontSize: 10,
+      
+  },  
+    
+   },
      animationEnabled: false,
      swipeEnabled: false,
+   //  backgroundColor:'rgba(15, 48, 72, 1.0)',
  
    }
   
@@ -124,8 +259,8 @@ class NavigationDrawerStructure extends Component {
           <TouchableOpacity onPress={this.toggleDrawer.bind(this)}>
             {/*Donute Button Image */}
             <Image
-              source={require('./../images/drawer.png')}
-              style={{ width: 25, height: 25, marginLeft: 5 }}
+              source={require('./../images/menu.png')}
+              style={{ width: 25, height: 25, marginLeft: 5,resizeMode:'contain'}}
             />
           </TouchableOpacity>
         </View>
@@ -207,7 +342,7 @@ class NavigationDrawerStructure extends Component {
   {
     initialRouteName: 'Screen1',
     contentComponent: DrawerScreen,
-   // drawerWidth: 250,  
+    drawerWidth: 200,  
   }
   
   );
