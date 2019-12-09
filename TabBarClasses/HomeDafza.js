@@ -42,9 +42,80 @@ class LogoTitle extends React.Component {
        this.state = {
         selectedIndex :0,
         selectTabSecond:false,
+        showIndicator:true,
+        refreshing:false,
+        loading:false,
+        titlearray:[],
+        NewsDatearray:[],
+        IDArray:[],
+        PublishingPageContentArray:[],
+        xmlString:{}
+     
       };
      }
     
+    
+  //  componentDidMount() {
+   //  this.setState({showIndicator:true}) 
+   //  this.makeRemoteRequest();
+    
+   
+//}
+componentDidMount()
+{
+
+  this.props.navigation.setParams({handelExchaneMethod:this.testMethod,selecttabIndex:this.state.selectedIndex})
+  this.setState({showIndicator:true}) 
+   this.makeRemoteRequest();
+
+
+}  
+
+
+
+makeRemoteRequest = () =>
+   {
+      const url = "https://www.dafz.ae/en/MediaCenter/News/_api/web/Lists/getbytitle('Pages')/items?$orderby=NewsDate%20asc&$select=Id,Title,FileRef,NewsDate,PublishingPageContent&$filter=startswith(ContentTypeId,%270x010100C568DB52D9D0A14D9B2FDCC96666E9F2007948130EC3DB064584E219954237AF3900242457EFB8B24247815D688C526CD44D00E8FD27B096270243BD%27)";
+       this.setState({loading:true})
+       fetch(url)
+      .then(res => res.text())
+      .then(res =>{
+       
+        var XMLParser = require('react-xml-parser');
+        var xml = new XMLParser().parseFromString(res);
+     
+      //  console.log(xml.getElementsByTagName('d:Title'));
+       
+          titlearraylocal =  xml.getElementsByTagName('d:Title');
+          idarraylocal =  xml.getElementsByTagName('d:Id');
+          NewsDatearraylocal =  xml.getElementsByTagName('d:NewsDate');
+          PublishingPageContentlocal =  xml.getElementsByTagName('d:PublishingPageContent');
+
+         firstdict = titlearray[0];
+         console.log(firstdict.value);
+        // var title = new get
+       
+        //  console.log(xml);
+       
+       
+        this.setState({
+          xmlString:xml,data:xml.children,error:res.error || null, loading:false,refreshing:false,showIndicator:false,titlearray:titlearraylocal,
+          IDArray:idarraylocal,NewsDatearray:NewsDatearraylocal,PublishingPageContentArray:PublishingPageContentlocal
+        
+         });
+      
+         
+      
+       //  console.log(this.state.data);
+     
+        })
+      .catch(error =>{
+         this.setState({error:error,loading:false})
+      });
+  
+  
+  
+    }
     
     
     static navigationOptions = ({navigation}) => {
@@ -74,12 +145,7 @@ class LogoTitle extends React.Component {
       
      };
 
-    componentDidMount()
-    {
-
-      this.props.navigation.setParams({handelExchaneMethod:this.testMethod,selecttabIndex:this.state.selectedIndex})
-    
-    } 
+   
    
  
    testMethod = ()=>
