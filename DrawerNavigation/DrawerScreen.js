@@ -148,7 +148,9 @@ import { DrawerActions } from 'react-navigation-drawer';
    
    
     return (
-      <View style = {{flex:1,backgroundColor:'rgba(15, 48, 72, 1.0)'}}>
+    //  <SafeAreaView style = {{flex:1,backgroundColor:'rgba(15, 48, 72, 1.0)'}}>
+     
+     <View style = {{flex:1,backgroundColor:'rgba(15, 48, 72, 1.0)'}}>
      {/* <SafeAreaView style = {{flex:1,backgroundColor:'rgba(15, 48, 72, 1.0)'}}> */}
       {/* <View style = {{backgroundColor:'green',flex:1,paddingTop:20}}>
         <ScrollView>
@@ -177,6 +179,9 @@ import { DrawerActions } from 'react-navigation-drawer';
         </ScrollView>
       </View> */}
     
+ 
+    
+    
      <ImageBackground style = {{flex:1,}}
             source = {require('./../images/01_Left_Pull_Out.png')}
       >
@@ -196,6 +201,8 @@ import { DrawerActions } from 'react-navigation-drawer';
    
     {/* </SafeAreaView> */}
       </View>
+      // </SafeAreaView>
+   
     );
   }
 }

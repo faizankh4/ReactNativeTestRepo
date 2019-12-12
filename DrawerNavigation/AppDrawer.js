@@ -28,6 +28,7 @@ import loginTababr from './../TabBarClasses/LoginTabbar';
 import Moretabbar from './../TabBarClasses/MoreTabBar';
 import HappinessTabbar from './../TabBarClasses/HappinestabBar';
 import HomeDafzascreen from './../TabBarClasses/HomeDafza';
+import ReachUsScreen from './../TabBarClasses/ReachUS/ReachUsFile'
 
 const HomeStack = createStackNavigator({
  Home:{screen:HomeDafzascreen,
@@ -78,10 +79,32 @@ const HomeStack = createStackNavigator({
 );
 
 const SettingStack = createStackNavigator({
+  ReachUS:{screen:ReachUsScreen,
+    navigationOptions:({navigation}) =>({
+     // headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+     title:'REACH US',
+      headerStyle:{
+          backgroundColor:'rgba(15, 48, 72, 1.0)',
+      },
+     headerTintColor:'black',
+     headerTitleStyle:{
+         fontWeight: '500',
+         fontSize: 20,
+         fontStyle: 'normal',
+         color:'white',
+     },
+    }),
+  },
   Settings:{screen:SettingsScreen},
   Detail:{screen:Detailscreen},
   WebviewScreen:{screen:WebviewScreen},
-});
+},
+{
+  initialRouteName:'ReachUS',
+}
+
+
+);
 
 
 const Loginstack = createStackNavigator({
@@ -218,7 +241,7 @@ const Tabs = createBottomTabNavigator(
        inactiveTintColor: 'white',
        style: {
         backgroundColor: 'rgba(15, 48, 72, 1.0)',
-        // height: 55,
+        // height: 80,
         // borderTopColor: 'transparent',
         // borderTopWidth: 1,
         // paddingRight: 10,
