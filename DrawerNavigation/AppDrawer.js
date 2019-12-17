@@ -29,6 +29,7 @@ import Moretabbar from './../TabBarClasses/MoreTabBar';
 import HappinessTabbar from './../TabBarClasses/HappinestabBar';
 import HomeDafzascreen from './../TabBarClasses/HomeDafza';
 import ReachUsScreen from './../TabBarClasses/ReachUS/ReachUsFile'
+import EnquiryScreen from './../TabBarClasses/ReachUS/Enquiry'
 
 const HomeStack = createStackNavigator({
  Home:{screen:HomeDafzascreen,
@@ -98,6 +99,25 @@ const SettingStack = createStackNavigator({
   Settings:{screen:SettingsScreen},
   Detail:{screen:Detailscreen},
   WebviewScreen:{screen:WebviewScreen},
+  EnquiryScreen:{screen:EnquiryScreen,
+    navigationOptions:({navigation}) =>({
+      // headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      title:'ENQUIRY',
+       headerStyle:{
+           backgroundColor:'rgba(15, 48, 72, 1.0)',
+       },
+      headerTintColor:'white',
+      headerTitleStyle:{
+          fontWeight: '500',
+          fontSize: 20,
+          fontStyle: 'normal',
+          color:'white',
+      },
+     }),
+  
+  },
+
+
 },
 {
   initialRouteName:'ReachUS',

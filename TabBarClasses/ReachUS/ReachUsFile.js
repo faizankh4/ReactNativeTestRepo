@@ -55,8 +55,10 @@ export default class ReachUsFile extends Component {
    
     showAlert = (item,index) =>
     {
-       Alert.alert(`value is ${item.labelTetx}`);
-    }
+     //  Alert.alert(`value is ${item.labelTetx}`);
+   
+      this.props.navigation.navigate('EnquiryScreen');
+     }
     
     
     renderItem = ({item,index}) => {
