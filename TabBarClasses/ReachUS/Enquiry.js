@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import react in our code.
-import { StyleSheet, View, Text,ScrollView,Button,TouchableOpacity,TextInput} from 'react-native';
+import { StyleSheet, View, Text,ScrollView,Button,TouchableOpacity,TextInput,Image,Alert} from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 // import all basic components
  
  let textStr = 'Fields with(*) mandatory fields Kindly note that the forms must be filled in English';
@@ -30,21 +31,125 @@ export default class Enquiry extends Component {
 
  }
  
- 
- 
-   renderScrollviewItem = (item) =>
+   popoverOpenClass = () =>
    {
+
+      Alert.alert('popover button press')
+   }
+ 
+   renderScrollviewItem = (item,index) =>
+   {
+    
+     if (index === 8)
+     {
       return(
-         <View style = {{margin:15,
-            padding:10,
-            height:40,
-            borderColor:'grey',
-            borderWidth:1,}}>
-          
-        </View>   
+        <View style = {{margin:5,
+          padding:10,
+          height:80,
+         // borderColor:'grey',
+         // borderWidth:1,
+          backgroundColor:'',
+          flexDirection:'row',
+          alignItems:'center',
+          justifyContent:'flex-start',
+          }}>
+        
+        <Text style = {{color:'white',fontSize:12,fontWeight:'500',width:55,}}>
+        {item.name}
+        </Text>
+        <Text style = {{flex:0.1,color:'white'}}>
+          *
+         </Text>
+        <TextInput style = {[styles.input,{flex:0.9,backgroundColor:'white',marginLeft:10,borderRadius:5,height:75}]} 
+              underlineColorAndroid = 'transparent'
+              placeholder = ''
+              placeholderTextColor = '#9a73ef'
+              autoCapitalize = 'none'
+              onChangeText = {(emailvalue) => this.handelEmail(emailvalue)}
+              multiline
+         />
+      
+      
+      </View> 
 
       )
 
+
+     }
+     else if (index === 2)
+     {
+      return(
+        <View style = {{margin:5,
+          padding:10,
+          height:35,
+         // borderColor:'grey',
+         // borderWidth:1,
+          backgroundColor:'',
+          flexDirection:'row',
+          alignItems:'center',
+          justifyContent:'flex-start',
+          }}>
+        
+        <Text style = {{color:'white',fontSize:12,fontWeight:'500',width:55,}}>
+        {item.name}
+        </Text>
+        <Text style = {{flex:0.1,color:'white'}}>
+          *
+       
+         </Text>
+         <TouchableOpacity style = {{flex:0.9,backgroundColor:'white',marginLeft:10,borderRadius:5,height:25,flexDirection:'row',alignItems:'center'}}
+                           onPress = {() => this.popoverOpenClass()} 
+         >
+        <Text style = {{backgroundColor:'',height:25,flex:1}} 
+         
+        >
+        </Text>
+       
+        <Image style = {{width:15,height:15,resizeMode:'contain'}}
+               source = {require('./../../images/drop_down.png')}
+        >
+       
+        </Image>
+        </TouchableOpacity>
+     
+      </View> 
+
+      )
+     
+    
+     }
+     else{
+    return(
+        <View style = {{margin:5,
+          padding:10,
+          height:35,
+         // borderColor:'grey',
+         // borderWidth:1,
+          backgroundColor:'',
+          flexDirection:'row',
+          alignItems:'center',
+          justifyContent:'flex-start',
+          }}>
+        
+        <Text style = {{color:'white',fontSize:12,fontWeight:'500',width:55,}}>
+        {item.name}
+        </Text>
+        <Text style = {{flex:0.1,color:'white'}}>
+          *
+         </Text>
+        <TextInput style = {[styles.input,{flex:0.9,backgroundColor:'white',marginLeft:10,borderRadius:5}]} 
+              underlineColorAndroid = 'transparent'
+              placeholder = ''
+              placeholderTextColor = '#9a73ef'
+              autoCapitalize = 'none'
+              onChangeText = {(emailvalue) => this.handelEmail(emailvalue)}
+         />
+      
+      
+      </View> 
+
+      )
+        }
    }
  
    handelEmail = (text) => {
@@ -54,6 +159,10 @@ export default class Enquiry extends Component {
  
    makeList = (item) =>
    (
+   
+   
+   
+   
     <View style = {{margin:5,
         padding:10,
         height:35,
@@ -90,13 +199,28 @@ export default class Enquiry extends Component {
  
    render() {
     return (
-      <View style={styles.MainContainer}>
+      // <View style={styles.MainContainer}>
        
-     
-        <ScrollView style = {{flex:1, backgroundColor:''}}>
+       <KeyboardAwareScrollView
+      style={{ backgroundColor: 'rgba(15, 48, 72, 1.0)' }}
+      resetScrollToCoords={{ x: 0, y: 0 }}
+      contentContainerStyle={styles.MainContainer}
+     // scrollEnabled={false}
+       >
+      
+        {/* <ScrollView style = {{flex:1, backgroundColor:''}}>
          {this.state.ListItem.map(this.makeList)}
        
-        </ScrollView>
+        </ScrollView> */}
+
+            <ScrollView>
+               {
+                  this.state.ListItem.map((item, index) => (
+                    
+                     this.renderScrollviewItem(item,index)
+                    ))
+               }
+            </ScrollView>
         <View style = {{height:80,backgroundColor:'rgba(15, 48, 72, 1.0)'}}>
         <Text style = {{fontSize:10,color:'white',margin:10}}>
         {textStr}
@@ -129,7 +253,10 @@ export default class Enquiry extends Component {
        
        
        </View>
-       </View>
+       
+       </KeyboardAwareScrollView>
+       
+      //  </View> 
     );
   }
 }
@@ -149,5 +276,15 @@ const styles = StyleSheet.create({
    // borderColor:'grey',
    // borderWidth:1, 
  },
+ item: {
+  flexDirection: 'row',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  padding: 30,
+  margin: 2,
+  borderColor: '#2a4944',
+  borderWidth: 1,
+  backgroundColor: '#d2f7f1'
+}
 
 });

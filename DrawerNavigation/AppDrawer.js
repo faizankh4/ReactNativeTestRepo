@@ -102,6 +102,7 @@ const SettingStack = createStackNavigator({
   EnquiryScreen:{screen:EnquiryScreen,
     navigationOptions:({navigation}) =>({
       // headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      
       title:'ENQUIRY',
        headerStyle:{
            backgroundColor:'rgba(15, 48, 72, 1.0)',
@@ -125,6 +126,21 @@ const SettingStack = createStackNavigator({
 
 
 );
+
+SettingStack.navigationOptions = ({navigation}) => {
+ 
+  let tabBarVisible = true;
+  let routeName = navigation.state.routes[navigation.state.index].routeName
+
+    if ( routeName == 'EnquiryScreen' ) {
+        tabBarVisible = false
+    }
+
+    return {
+        tabBarVisible,
+    }
+}
+
 
 
 const Loginstack = createStackNavigator({
