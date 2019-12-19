@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 //import react in our code.
-import { StyleSheet, View, Text,ScrollView,Button,TouchableOpacity,TextInput,Image,Alert} from 'react-native';
+import { StyleSheet, View, Text,ScrollView,Button,TouchableOpacity,TextInput,Image,Alert,FlatList} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import renderif from './../renderif'
 // import all basic components
  
  let textStr = 'Fields with(*) mandatory fields Kindly note that the forms must be filled in English';
-
+ const category_array = ['License','Lease','Sales','IT','Activity','Administration','DGS Office','Engineering','Finance','Human Capital','Marketing','Visas','Security & Logistics']; 
 
 export default class Enquiry extends Component {
   //Screen2 Component
@@ -24,7 +25,9 @@ export default class Enquiry extends Component {
      {name:'Subject',id:8},
      {name:'message',id:19},
 
-     ]
+     ],
+     showSubView:false,
+     categoryTextValue:null,
    
  }
 
@@ -34,10 +37,49 @@ export default class Enquiry extends Component {
    popoverOpenClass = () =>
    {
 
-      Alert.alert('popover button press')
-   }
+    //  Alert.alert('popover button press')
+       this.setState({showSubView:!this.state.showSubView});
+   
+    }
  
-   renderScrollviewItem = (item,index) =>
+    removeSubView = (Item) =>
+    {
+     
+      if (Item)
+      {
+        this.setState({showSubView:false,categoryTextValue:Item})
+      }
+      else{
+        // Alert.alert('call');
+         this.setState({showSubView:false})
+    }
+    }
+ 
+ 
+   removefromsuperView()
+   {
+    
+
+   }
+   
+   
+    renderSeparator = () => {  
+      return (  
+          <View  
+              style={{  
+                  height: 1,  
+                  width: "100%",  
+                  backgroundColor: "darkgray", 
+                  marginLeft:'0%',
+              }}  
+          > 
+          </View> 
+      );  
+  };  
+   
+   
+   
+    renderScrollviewItem = (item,index) =>
    {
     
      if (index === 8)
@@ -79,6 +121,8 @@ export default class Enquiry extends Component {
      else if (index === 2)
      {
       return(
+       <View style = {{flexDirection:'column',backgroundColor:'rgba(15, 48, 72, 1.0)',alignItems:'center',opacity:1.0}}>
+       
         <View style = {{margin:5,
           padding:10,
           height:35,
@@ -100,9 +144,11 @@ export default class Enquiry extends Component {
          <TouchableOpacity style = {{flex:0.9,backgroundColor:'white',marginLeft:10,borderRadius:5,height:25,flexDirection:'row',alignItems:'center'}}
                            onPress = {() => this.popoverOpenClass()} 
          >
-        <Text style = {{backgroundColor:'',height:25,flex:1}} 
+        <Text style = {{backgroundColor:'',height:25,flex:1,marginLeft:5,marginTop:10}} 
          
         >
+       {this.state.categoryTextValue}
+       
         </Text>
        
         <Image style = {{width:15,height:15,resizeMode:'contain'}}
@@ -113,7 +159,40 @@ export default class Enquiry extends Component {
         </TouchableOpacity>
      
       </View> 
+      {renderif(this.state.showSubView)(
+        <View style = {styles.inputContainer}>
+      <FlatList                                                  
+     data = {category_array}
+     renderItem = {({item}) => <View style={{backgroundColor:'',marginBottom:0,height:44,flexDirection:'row'}}
+     ItemSeparatorComponent = {this.renderSeparator}
+     >
+     
+     
+     <View style = {{flex:1,backgroundColor:''}}>
+     <TouchableOpacity  onPress = {() => this.removeSubView(item)}
+                        style  = {{backgroundColor:'',flex:1,justifyContent:'center',alignItems:'flex-start'}} 
+     >                
+     <Text style = {{marginLeft:5,textTransform:'uppercase',fontSize:10,fontWeight:'500',color:'black'}}>{item}</Text>
+     </TouchableOpacity>
+    </View>
+    
+     </View>
+     }                         
 
+     
+    ItemSeparatorComponent = {this.renderSeparator}
+    keyExtractor = {item => item.key}
+    horizontal={false}>
+    </FlatList>                
+        
+        
+        </View> 
+     )}
+      
+     
+     
+      </View>
+     
       )
      
     
@@ -199,14 +278,18 @@ export default class Enquiry extends Component {
  
    render() {
     return (
-      // <View style={styles.MainContainer}>
+       <View style={styles.MainContainer}
+        //  onStartShouldSetResponder={() => this.removefromsuperView()}
+        onStartShouldSetResponder ={() => this.removeSubView()}
+      >
        
-       <KeyboardAwareScrollView
-      style={{ backgroundColor: 'rgba(15, 48, 72, 1.0)' }}
-      resetScrollToCoords={{ x: 0, y: 0 }}
-      contentContainerStyle={styles.MainContainer}
-     // scrollEnabled={false}
-       >
+     <KeyboardAwareScrollView
+     style={{ backgroundColor: 'rgba(15, 48, 72, 1.0)' }}
+       resetScrollToCoords={{ x: 0, y: 0 }}
+       contentContainerStyle={styles.MainContainer}
+     scrollEnabled={false}
+   
+      >
       
         {/* <ScrollView style = {{flex:1, backgroundColor:''}}>
          {this.state.ListItem.map(this.makeList)}
@@ -256,7 +339,7 @@ export default class Enquiry extends Component {
        
        </KeyboardAwareScrollView>
        
-      //  </View> 
+        </View> 
     );
   }
 }
@@ -277,6 +360,7 @@ const styles = StyleSheet.create({
    // borderWidth:1, 
  },
  item: {
+
   flexDirection: 'row',
   justifyContent: 'space-between',
   alignItems: 'center',
@@ -285,6 +369,17 @@ const styles = StyleSheet.create({
   borderColor: '#2a4944',
   borderWidth: 1,
   backgroundColor: '#d2f7f1'
+},
+inputContainer:{
+  width:180,
+  height:150,
+  backgroundColor:'white',
+  marginLeft:80,
+  marginTop:-5,
+  borderColor:'black',
+  borderWidth:5,
+  borderRadius: 2,
+
 }
 
 });
