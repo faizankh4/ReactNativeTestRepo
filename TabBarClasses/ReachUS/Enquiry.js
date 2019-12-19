@@ -197,6 +197,43 @@ export default class Enquiry extends Component {
      
     
      }
+     if(index === 3 || index === 4 )
+     {
+      return(
+        <View style = {{margin:5,
+          padding:10,
+          height:35,
+         // borderColor:'grey',
+         // borderWidth:1,
+          backgroundColor:'',
+          flexDirection:'row',
+          alignItems:'center',
+          justifyContent:'flex-start',
+          }}>
+        
+        <Text style = {{color:'white',fontSize:12,fontWeight:'500',width:55,}}>
+        {item.name}
+        </Text>
+        <Text style = {{flex:0.1,color:'white'}}>
+          *
+         </Text>
+        <TextInput style = {[styles.input,{flex:0.9,backgroundColor:'white',marginLeft:10,borderRadius:5}]} 
+              underlineColorAndroid = 'transparent'
+              placeholder = ''
+              placeholderTextColor = '#9a73ef'
+              autoCapitalize = 'none'
+              onChangeText = {(emailvalue) => this.handelEmail(emailvalue)}
+              keyboardType = {"number-pad"}
+        />
+      
+      
+      </View> 
+
+      )
+      
+   
+   
+    } 
      else{
     return(
         <View style = {{margin:5,
@@ -222,7 +259,7 @@ export default class Enquiry extends Component {
               placeholderTextColor = '#9a73ef'
               autoCapitalize = 'none'
               onChangeText = {(emailvalue) => this.handelEmail(emailvalue)}
-         />
+        />
       
       
       </View> 
