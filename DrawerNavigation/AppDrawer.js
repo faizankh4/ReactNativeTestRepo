@@ -144,6 +144,7 @@ SettingStack.navigationOptions = ({navigation}) => {
 
 
 const Loginstack = createStackNavigator({
+  inputscreen:{screen:inputScreen},
   Loginscreen:{screen:loginTababr},
  
 });

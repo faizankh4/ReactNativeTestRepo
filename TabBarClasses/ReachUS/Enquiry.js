@@ -15,26 +15,63 @@ export default class Enquiry extends Component {
    this.state = {
      firstVar:'',
      ListItem:[
-     {name:'Name',id:1},
-     {name:'Company',id:2},
-     {name:'Category',id:3},
-     {name:'Tel/Mobile',id:4},
-     {name:'Fax',id:5},
-     {name:'Country',id:6},
-     {name:'E-Mail',id:7},
-     {name:'Subject',id:8},
-     {name:'message',id:19},
+     {name:'Name',id:1,refText:'Name'},
+     {name:'Company',id:2,refText:'Company'},
+     {name:'Category',id:3,refText:'Category'},
+     {name:'Tel/Mobile',id:4,refText:'Mobile'},
+     {name:'Fax',id:5,refText:'Fax'},
+     {name:'Country',id:6,refText:'Country'},
+     {name:'E-Mail',id:7,refText:'EMail'},
+     {name:'Subject',id:8,refText:'Subject'},
+     {name:'message',id:19,refText:'message'},
 
      ],
      showSubView:false,
      categoryTextValue:null,
-   
+     Name:'',
+     Company:'',
+     Category:'',
+     Mobile:'',
+     Fax:'',
+     Country:'',
+     EMail:'',
+     Subject:'',
+     message:'',
+     rerenderView:true,
  }
 
 
  }
  
-   popoverOpenClass = () =>
+ _onChangetetx = (key,value) =>
+ {
+   this.setState({[key]:value});
+ }
+ 
+ 
+ submitButton = () =>
+  {
+
+   var name = this.refs.Name._lastNativeText;
+   var company = this.refs.Company._lastNativeText; 
+   var category = this.state.categoryTextValue;
+   var Mobile =  this.refs.Mobile._lastNativeText;
+   var fax =  this.refs.Fax._lastNativeText;
+   var Country =  this.refs.Country._lastNativeText;
+   var Email =  this.refs.EMail._lastNativeText;
+   var Subject = this.refs.Subject._lastNativeText;
+   var message = this.refs.message._lastNativeText;
+
+  
+ // Alert.alert(name + company + category  + fax + Country  + Subject + message + Mobile +  Email) ;
+  
+   this.setState({rerenderView:true})
+
+ }
+ 
+ 
+ 
+ popoverOpenClass = () =>
    {
 
     //  Alert.alert('popover button press')
@@ -94,7 +131,9 @@ export default class Enquiry extends Component {
           flexDirection:'row',
           alignItems:'center',
           justifyContent:'flex-start',
-          }}>
+          }}
+         
+          >
         
         <Text style = {{color:'white',fontSize:12,fontWeight:'500',width:55,}}>
         {item.name}
@@ -107,8 +146,11 @@ export default class Enquiry extends Component {
               placeholder = ''
               placeholderTextColor = '#9a73ef'
               autoCapitalize = 'none'
-              onChangeText = {(emailvalue) => this.handelEmail(emailvalue)}
-              multiline
+              onChangeText = {(emailvalue) => this._onChangetetx(item.refText,emailvalue)}
+              multiline = {true}
+              autoCorrect = {false}
+              ref = {item.refText}
+              
          />
       
       
@@ -121,7 +163,9 @@ export default class Enquiry extends Component {
      else if (index === 2)
      {
       return(
-       <View style = {{flexDirection:'column',backgroundColor:'rgba(15, 48, 72, 1.0)',alignItems:'center',opacity:1.0}}>
+       <View style = {{flexDirection:'column',backgroundColor:'rgba(15, 48, 72, 1.0)',alignItems:'center',opacity:1.0}}
+       
+       >
        
         <View style = {{margin:5,
           padding:10,
@@ -132,7 +176,9 @@ export default class Enquiry extends Component {
           flexDirection:'row',
           alignItems:'center',
           justifyContent:'flex-start',
-          }}>
+          }}
+        
+          >
         
         <Text style = {{color:'white',fontSize:12,fontWeight:'500',width:55,}}>
         {item.name}
@@ -209,7 +255,9 @@ export default class Enquiry extends Component {
           flexDirection:'row',
           alignItems:'center',
           justifyContent:'flex-start',
-          }}>
+          }}
+          
+          >
         
         <Text style = {{color:'white',fontSize:12,fontWeight:'500',width:55,}}>
         {item.name}
@@ -222,8 +270,10 @@ export default class Enquiry extends Component {
               placeholder = ''
               placeholderTextColor = '#9a73ef'
               autoCapitalize = 'none'
-              onChangeText = {(emailvalue) => this.handelEmail(emailvalue)}
+              onChangeText = {(emailvalue) => this._onChangetetx(item.refText,emailvalue)}
               keyboardType = {"number-pad"}
+              ref = {item.refText}
+             
         />
       
       
@@ -245,7 +295,9 @@ export default class Enquiry extends Component {
           flexDirection:'row',
           alignItems:'center',
           justifyContent:'flex-start',
-          }}>
+          }}
+          
+          >
         
         <Text style = {{color:'white',fontSize:12,fontWeight:'500',width:55,}}>
         {item.name}
@@ -258,7 +310,9 @@ export default class Enquiry extends Component {
               placeholder = ''
               placeholderTextColor = '#9a73ef'
               autoCapitalize = 'none'
-              onChangeText = {(emailvalue) => this.handelEmail(emailvalue)}
+              onChangeText = {(emailvalue) => this._onChangetetx(item.refText,emailvalue)}
+              ref = {item.refText}
+             
         />
       
       
@@ -314,6 +368,9 @@ export default class Enquiry extends Component {
  
  
    render() {
+   
+    if(this.state.rerenderView)
+    {
     return (
        <View style={styles.MainContainer}
         //  onStartShouldSetResponder={() => this.removefromsuperView()}
@@ -357,7 +414,7 @@ export default class Enquiry extends Component {
             </Text>    
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.test()}
+          <TouchableOpacity onPress={this.submitButton.bind(this)}
                             style = {{backgroundColor:'white',borderRadius:5,width:70,height:25,alignItems:'center',justifyContent:'center'}}
           >
             
@@ -376,8 +433,9 @@ export default class Enquiry extends Component {
        
        </KeyboardAwareScrollView>
        
-        </View> 
+         </View> 
     );
+              }
   }
 }
  

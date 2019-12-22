@@ -11,7 +11,13 @@ export class InputTabbar extends React.Component {
        password:'',
      };
  
-    handelEmail = (text) => {
+   
+   _onChangetetx = (key,value) =>
+   {
+     this.setState({[key]:value});
+   }
+
+     handelEmail = (text) => {
         this.setState({email:text})
     }
     handelPassword = (text) =>{
@@ -22,6 +28,16 @@ export class InputTabbar extends React.Component {
       Alert.alert('email   ' + email + 'password   ' + password);
     };
   
+  
+    signIn = () => {
+      var username = this.refs.username._lastNativeText;
+      var password = this.refs.password._lastNativeText;
+  
+     Alert.alert('username is :' + username + 'password is :' + password); //doesn't work
+      //Alert.alert(password); //doesn't work
+    }
+  
+  
     render(){
    return(
       <View style = {styles.container}>
@@ -30,20 +46,37 @@ export class InputTabbar extends React.Component {
             placeholder = 'Email'
             placeholderTextColor = '#9a73ef'
             autoCapitalize = 'none'
-            onChangeText = {(emailvalue) => this.handelEmail(emailvalue)}
+           // ref= {(el) => { this.email = el; }}
+           // onChangeText = {(emailvalue) => this.handelEmail(emailvalue)}
+           // onChangeText = {(email) => this.setState({email})}
+           // value = {this.state.email}
+           //onChangeText = {(text) => this._onChangetetx('email',text)}
+           ref = 'username'
        />
       <TextInput style={styles.input}
            underlineColorAndroid = 'transparent'
            placeholder = 'password'
            placeholderTextColor = '#9a73ef' 
            autoCapitalize = 'none'
-           onChangeText = {(passwordValue) => this.handelPassword(passwordValue)}
+          // onChangeText = {(passwordValue) => this.handelPassword(passwordValue)}
            secureTextEntry = 'yes'
+          // ref = 'password'
+         //  onChangeText = {(text) => this.setState({text})}
+          // onChangeText = {(text) => this._onChangetetx('password',text)}
+          ref = 'password'
       />
                 
       <TouchableOpacity
         style = {styles.submittbutton}
         onPress = {() => this.login(this.state.email,this.state.password)}>
+        
+        <Text style = {styles.submittButtonText}>Submitt</Text>
+       
+        </TouchableOpacity>
+
+        <TouchableOpacity
+        style = {styles.submittbutton}
+        onPress = {this.signIn.bind(this)}>
         
         <Text style = {styles.submittButtonText}>Submitt</Text>
        
