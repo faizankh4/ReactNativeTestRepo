@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text,ScrollView,Button,TouchableOpacity,TextInput,Image,Alert,FlatList} from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import renderif from './../renderif'
+import MailCompose from 'react-native-mail-compose';
 // import all basic components
  
  let textStr = 'Fields with(*) mandatory fields Kindly note that the forms must be filled in English';
@@ -49,6 +50,10 @@ export default class Enquiry extends Component {
  }
  
  
+ 
+ 
+ 
+ 
  submitButton = () =>
   {
 
@@ -62,16 +67,86 @@ export default class Enquiry extends Component {
    var Subject = this.refs.Subject._lastNativeText;
    var message = this.refs.message._lastNativeText;
 
+   if (name && Mobile && Email && Subject)
+   {
+   
+   if (name.length === 0 || Mobile.length === 0 || Email.length === 0 || Subject.length === 0)
+   {
+    Alert.alert('Alert','Mandatory Field is Empty') ;
+   
+   }
+  else{
+   // Alert.alert('Alert','Mandatory Field is Empty') ; 
+     if(this.validateEmail(Email))
+     {
+
+    //  Alert.alert('email is valid'); 
+      this.sendMail()
+   
+    }
+    else{
+      Alert.alert('email is Invalid'); 
   
- // Alert.alert(name + company + category  + fax + Country  + Subject + message + Mobile +  Email) ;
+      this.sendMail()
+    }
   
-   this.setState({rerenderView:true})
+    } 
+  
+}
+  else{
+    Alert.alert('Alert','Mandatory Field is Empty') ;
+  }
+  // Alert.alert(name + company + category  + fax + Country  + Subject + message + Mobile +  Email) ;
+  
+  // this.setState({rerenderView:true})
 
  }
  
  
+ validateEmail = (text) => {
+  console.log(text);
+  let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+  if(reg.test(text) === false)
+  {
+  console.log("Email is Not Correct");
+  
+  return false;
+    }
+  else {
+    
+    console.log("Email is Correct");
+     return true;
+  }
+  
+}
  
- popoverOpenClass = () =>
+async sendMail() {
+  try {
+    await MailCompose.send({
+      toRecipients: ['to1@example.com', 'to2@example.com'],
+      ccRecipients: ['cc1@example.com', 'cc2@example.com'],
+      bccRecipients: ['bcc1@example.com', 'bcc2@example.com'],
+      subject: 'This is subject',
+      text: 'This is body',
+      html: '<p>This is <b>html</b> body</p>', // Or, use this if you want html body. Note that some Android mail clients / devices don't support this properly.
+      attachments: [{
+        filename: 'mytext', // [Optional] If not provided, UUID will be generated.
+        ext: '.txt',
+        mimeType: 'text/plain',
+        text: 'Hello my friend', // Use this if the data is in UTF8 text.
+        data: '...BASE64_ENCODED_STRING...', // Or, use this if the data is not in plain text.
+      }],
+    });
+  } catch (e) {
+    // e.code may be 'cannotSendMail' || 'cancelled' || 'saved' || 'failed'
+    Alert.alert('Failure',"Your device doesn't support the composer sheet");
+ 
+  }
+}
+ 
+
+
+popoverOpenClass = () =>
    {
 
     //  Alert.alert('popover button press')
@@ -273,6 +348,7 @@ export default class Enquiry extends Component {
               onChangeText = {(emailvalue) => this._onChangetetx(item.refText,emailvalue)}
               keyboardType = {"number-pad"}
               ref = {item.refText}
+              autoCorrect = {false}
              
         />
       
@@ -284,7 +360,51 @@ export default class Enquiry extends Component {
    
    
     } 
-     else{
+    else if (index === 6)
+    {
+
+      return(
+        <View style = {{margin:5,
+          padding:10,
+          height:35,
+         // borderColor:'grey',
+         // borderWidth:1,
+          backgroundColor:'',
+          flexDirection:'row',
+          alignItems:'center',
+          justifyContent:'flex-start',
+          }}
+          
+          >
+        
+        <Text style = {{color:'white',fontSize:12,fontWeight:'500',width:55,}}>
+        {item.name}
+        </Text>
+        <Text style = {{flex:0.1,color:'white'}}>
+          *
+         </Text>
+        <TextInput style = {[styles.input,{flex:0.9,backgroundColor:'white',marginLeft:10,borderRadius:5}]} 
+              underlineColorAndroid = 'transparent'
+              placeholder = ''
+              placeholderTextColor = '#9a73ef'
+              autoCapitalize = 'none'
+              onChangeText = {(emailvalue) => this._onChangetetx(item.refText,emailvalue)}
+              ref = {item.refText}
+              autoCorrect = {false}
+              value = {this.state.Email}
+             
+        />
+      
+      
+      </View> 
+
+      )
+    
+    
+    
+    
+    }
+    else{
     return(
         <View style = {{margin:5,
           padding:10,
@@ -312,6 +432,7 @@ export default class Enquiry extends Component {
               autoCapitalize = 'none'
               onChangeText = {(emailvalue) => this._onChangetetx(item.refText,emailvalue)}
               ref = {item.refText}
+              autoCorrect = {false}
              
         />
       
@@ -369,8 +490,8 @@ export default class Enquiry extends Component {
  
    render() {
    
-    if(this.state.rerenderView)
-    {
+   // if(this.state.rerenderView)
+  
     return (
        <View style={styles.MainContainer}
         //  onStartShouldSetResponder={() => this.removefromsuperView()}
@@ -435,7 +556,7 @@ export default class Enquiry extends Component {
        
          </View> 
     );
-              }
+             
   }
 }
  
