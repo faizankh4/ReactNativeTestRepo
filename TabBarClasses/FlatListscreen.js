@@ -173,6 +173,7 @@ render(){
     horizontal={false}
     //ListHeaderComponent = {this.renderFooter}
     //ListFooterComponent = {this.renderFooter}
+    
        >
     </FlatList>   
     </View>

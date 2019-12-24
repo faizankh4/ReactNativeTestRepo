@@ -8,8 +8,9 @@ import MailCompose from 'react-native-mail-compose';
  
  let textStr = 'Fields with(*) mandatory fields Kindly note that the forms must be filled in English';
  const category_array = ['License','Lease','Sales','IT','Activity','Administration','DGS Office','Engineering','Finance','Human Capital','Marketing','Visas','Security & Logistics']; 
+  var subjectBody = '';
 
-export default class Enquiry extends Component {
+ export default class Enquiry extends Component {
   //Screen2 Component
   constructor(){
     super()
@@ -80,14 +81,15 @@ export default class Enquiry extends Component {
      if(this.validateEmail(Email))
      {
 
-    //  Alert.alert('email is valid'); 
+      subjectBody = 'Sub :' + Subject +  '\n\n' + 'Name :- ' + name + ' \n ' + 'Company name :- ' + company + ' \n Country :- ' + Country + '\n Mobile:- ' + Mobile + ' \n category :-' + category + ' \n Email -: ' + Email + ' \n\n Comments -:' + message;
+       // Alert.alert(subjectBody); 
       this.sendMail()
    
     }
     else{
-      Alert.alert('email is Invalid'); 
+    //  Alert.alert('email is Invalid'); 
   
-      this.sendMail()
+    //  this.sendMail()
     }
   
     } 
@@ -123,19 +125,22 @@ export default class Enquiry extends Component {
 async sendMail() {
   try {
     await MailCompose.send({
-      toRecipients: ['to1@example.com', 'to2@example.com'],
-      ccRecipients: ['cc1@example.com', 'cc2@example.com'],
-      bccRecipients: ['bcc1@example.com', 'bcc2@example.com'],
-      subject: 'This is subject',
-      text: 'This is body',
-      html: '<p>This is <b>html</b> body</p>', // Or, use this if you want html body. Note that some Android mail clients / devices don't support this properly.
-      attachments: [{
-        filename: 'mytext', // [Optional] If not provided, UUID will be generated.
-        ext: '.txt',
-        mimeType: 'text/plain',
-        text: 'Hello my friend', // Use this if the data is in UTF8 text.
-        data: '...BASE64_ENCODED_STRING...', // Or, use this if the data is not in plain text.
-      }],
+     // toRecipients: ['to1@example.com', 'to2@example.com'],
+    //  ccRecipients: ['cc1@example.com', 'cc2@example.com'],
+     // bccRecipients: ['bcc1@example.com', 'bcc2@example.com'],
+     
+     toRecipients: ['customercare@dafz.ae'],
+
+     subject: 'ENQUIRY FROM DAFZ MOBILE APPS',
+      text: subjectBody,
+      // html: '<p>This is <b>html</b> body</p>', // Or, use this if you want html body. Note that some Android mail clients / devices don't support this properly.
+      // attachments: [{
+      //   filename: 'mytext', // [Optional] If not provided, UUID will be generated.
+      //   ext: '.txt',
+      //   mimeType: 'text/plain',
+      //   text: 'Hello my friend', // Use this if the data is in UTF8 text.
+      //   data: '...BASE64_ENCODED_STRING...', // Or, use this if the data is not in plain text.
+      // }],
     });
   } catch (e) {
     // e.code may be 'cannotSendMail' || 'cancelled' || 'saved' || 'failed'
