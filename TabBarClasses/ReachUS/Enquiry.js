@@ -19,11 +19,11 @@ import MailCompose from 'react-native-mail-compose';
      ListItem:[
      {name:'Name',id:1,refText:'Name'},
      {name:'Company',id:2,refText:'Company'},
-     {name:'Category',id:3,refText:'Category'},
+     {name:'Category',id:3,refText:'categoryTextValue'},
      {name:'Tel/Mobile',id:4,refText:'Mobile'},
      {name:'Fax',id:5,refText:'Fax'},
      {name:'Country',id:6,refText:'Country'},
-     {name:'E-Mail',id:7,refText:'EMail'},
+     {name:'E-Mail',id:7,refText:'Email'},
      {name:'Subject',id:8,refText:'Subject'},
      {name:'message',id:19,refText:'message'},
 
@@ -36,7 +36,7 @@ import MailCompose from 'react-native-mail-compose';
      Mobile:'',
      Fax:'',
      Country:'',
-     EMail:'',
+     Email:'',
      Subject:'',
      message:'',
      rerenderView:true,
@@ -51,7 +51,10 @@ import MailCompose from 'react-native-mail-compose';
  }
  
  
- 
+ clearAllField()
+ {
+   this.setState({Name:'',Company:'',Category:'',Mobile:'',Fax:'',Country:'',Email:'',Subject:'',message:'',categoryTextValue:''})
+ }
  
  
  
@@ -64,7 +67,7 @@ import MailCompose from 'react-native-mail-compose';
    var Mobile =  this.refs.Mobile._lastNativeText;
    var fax =  this.refs.Fax._lastNativeText;
    var Country =  this.refs.Country._lastNativeText;
-   var Email =  this.refs.EMail._lastNativeText;
+   var Email =  this.refs.Email._lastNativeText;
    var Subject = this.refs.Subject._lastNativeText;
    var message = this.refs.message._lastNativeText;
 
@@ -82,7 +85,7 @@ import MailCompose from 'react-native-mail-compose';
      {
 
       subjectBody = 'Sub :' + Subject +  '\n\n' + 'Name :- ' + name + ' \n ' + 'Company name :- ' + company + ' \n Country :- ' + Country + '\n Mobile:- ' + Mobile + ' \n category :-' + category + ' \n Email -: ' + Email + ' \n\n Comments -:' + message;
-       // Alert.alert(subjectBody); 
+       //git Alert.alert(subjectBody); 
       this.sendMail()
    
     }
@@ -131,20 +134,21 @@ async sendMail() {
      
      toRecipients: ['customercare@dafz.ae'],
 
-     subject: 'ENQUIRY FROM DAFZ MOBILE APPS',
-      text: subjectBody,
-      // html: '<p>This is <b>html</b> body</p>', // Or, use this if you want html body. Note that some Android mail clients / devices don't support this properly.
-      // attachments: [{
-      //   filename: 'mytext', // [Optional] If not provided, UUID will be generated.
-      //   ext: '.txt',
-      //   mimeType: 'text/plain',
-      //   text: 'Hello my friend', // Use this if the data is in UTF8 text.
-      //   data: '...BASE64_ENCODED_STRING...', // Or, use this if the data is not in plain text.
-      // }],
+     subject: 'This is subject',
+    // text: 'This is body',
+    // html: '<p>This is <b>html</b> body</p>', // Or, use this if you want html body. Note that some Android mail clients / devices don't support this properly.
+     body:subjectBody,
+    //  attachments: [{
+    //    filename: 'mytext', // [Optional] If not provided, UUID will be generated.
+    //    ext: '.txt',
+    //    mimeType: 'text/plain',
+    //    text: 'Hello my friend', // Use this if the data is in UTF8 text.
+    //    data: '...BASE64_ENCODED_STRING...', // Or, use this if the data is not in plain text.
+    //  }],
     });
   } catch (e) {
     // e.code may be 'cannotSendMail' || 'cancelled' || 'saved' || 'failed'
-    Alert.alert('Failure',"Your device doesn't support the composer sheet");
+   // Alert.alert('Failure',"Your device doesn't support the composer sheet");
  
   }
 }
@@ -230,6 +234,7 @@ popoverOpenClass = () =>
               multiline = {true}
               autoCorrect = {false}
               ref = {item.refText}
+              value = {this.state.message}
               
          />
       
@@ -345,6 +350,7 @@ popoverOpenClass = () =>
         <Text style = {{flex:0.1,color:'white'}}>
           *
          </Text>
+         {renderif(index === 3)(
         <TextInput style = {[styles.input,{flex:0.9,backgroundColor:'white',marginLeft:10,borderRadius:5}]} 
               underlineColorAndroid = 'transparent'
               placeholder = ''
@@ -354,10 +360,28 @@ popoverOpenClass = () =>
               keyboardType = {"number-pad"}
               ref = {item.refText}
               autoCorrect = {false}
+              value = {this.state.Mobile}
              
         />
-      
-      
+         )
+         }
+        {renderif(index === 4)(
+        <TextInput style = {[styles.input,{flex:0.9,backgroundColor:'white',marginLeft:10,borderRadius:5}]} 
+              underlineColorAndroid = 'transparent'
+              placeholder = ''
+              placeholderTextColor = '#9a73ef'
+              autoCapitalize = 'none'
+              onChangeText = {(emailvalue) => this._onChangetetx(item.refText,emailvalue)}
+              keyboardType = {"number-pad"}
+              ref = {item.refText}
+              autoCorrect = {false}
+              value = {this.state.Fax}
+             
+        />
+         )
+         }
+     
+     
       </View> 
 
       )
@@ -430,6 +454,7 @@ popoverOpenClass = () =>
         <Text style = {{flex:0.1,color:'white'}}>
           *
          </Text>
+         {renderif(index === 0)(
         <TextInput style = {[styles.input,{flex:0.9,backgroundColor:'white',marginLeft:10,borderRadius:5}]} 
               underlineColorAndroid = 'transparent'
               placeholder = ''
@@ -438,10 +463,55 @@ popoverOpenClass = () =>
               onChangeText = {(emailvalue) => this._onChangetetx(item.refText,emailvalue)}
               ref = {item.refText}
               autoCorrect = {false}
+              value = {this.state.Name}
              
         />
-      
-      
+         )
+         }
+          {renderif(index === 1)(
+        <TextInput style = {[styles.input,{flex:0.9,backgroundColor:'white',marginLeft:10,borderRadius:5}]} 
+              underlineColorAndroid = 'transparent'
+              placeholder = ''
+              placeholderTextColor = '#9a73ef'
+              autoCapitalize = 'none'
+              onChangeText = {(emailvalue) => this._onChangetetx(item.refText,emailvalue)}
+              ref = {item.refText}
+              autoCorrect = {false}
+              value = {this.state.Company}
+             
+        />
+         )
+         }
+           {renderif(index === 5)(
+        <TextInput style = {[styles.input,{flex:0.9,backgroundColor:'white',marginLeft:10,borderRadius:5}]} 
+              underlineColorAndroid = 'transparent'
+              placeholder = ''
+              placeholderTextColor = '#9a73ef'
+              autoCapitalize = 'none'
+              onChangeText = {(emailvalue) => this._onChangetetx(item.refText,emailvalue)}
+              ref = {item.refText}
+              autoCorrect = {false}
+              value = {this.state.Country}
+             
+        />
+         )
+         }
+          {renderif(index === 7)(
+        <TextInput style = {[styles.input,{flex:0.9,backgroundColor:'white',marginLeft:10,borderRadius:5}]} 
+              underlineColorAndroid = 'transparent'
+              placeholder = ''
+              placeholderTextColor = '#9a73ef'
+              autoCapitalize = 'none'
+              onChangeText = {(emailvalue) => this._onChangetetx(item.refText,emailvalue)}
+              ref = {item.refText}
+              autoCorrect = {false}
+              value = {this.state.Subject}
+             
+        />
+         )
+         }
+     
+     
       </View> 
 
       )
@@ -533,7 +603,7 @@ popoverOpenClass = () =>
 
       
         <TouchableOpacity style = {{backgroundColor:'white',borderRadius:5,width:70,height:25,alignItems:'center',justifyContent:'center'}} 
-        onPress={() => this.test()}>
+        onPress={() => this.clearAllField()}>
             
             <Text style = {{color:'rgba(15, 48, 72, 1.0)',fontSize:12,fontWeight:'500'}}>
              Cancel
