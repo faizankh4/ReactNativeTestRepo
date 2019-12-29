@@ -57,8 +57,14 @@ export default class ReachUsFile extends Component {
     {
      //  Alert.alert(`value is ${item.labelTetx}`);
    
-      this.props.navigation.navigate('EnquiryScreen');
+     if (index === 0)
+     { 
+     this.props.navigation.navigate('LocateUSScreen');
      }
+     else{
+      this.props.navigation.navigate('EnquiryScreen'); 
+     }
+    }
     
     
     renderItem = ({item,index}) => {
