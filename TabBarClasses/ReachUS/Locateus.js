@@ -6,6 +6,7 @@ import SegmentedControlTab from "react-native-segmented-control-tab";
 //import {Linking} from 'react-native'
 import renderif from './../renderif'
 //import MapView from 'react-native-maps';
+import MapView from 'react-native-maps';
 const Byroadtext = 'From Shaikh Zayed Road:\nOn Shaikh Zayed road, drive towards Sharjah. After crossing the Garhoud bridge, join Shaikh Rashid Road. Continue on to Dubai-Sharjah road and take exit to join Al Quds Street. DAFZA will be on your left at the third traffic signal.\n\nFrom Dubai International Airport :\nDrive on D89 with Airport on your right. Take slight right to join Shaikh Rashid Road. Continue on to Dubai-Sharjah road and take exit to join Al Quds Street. DAFZA will be on your left at the third traffic signal.'
 const ByMetroText = 'By Metro :\n\nTake the Green Line and alight at the DAFZA station. DAFZA operates a feeder bus service from DAFZA station to DAFZA '
 const phoneNo = '+971 4 299 5555'
@@ -175,18 +176,18 @@ makeCall()
         }
        
        >
+      <MapView
+         style = {{flex:1 }}
+         showsUserLocation = {true}
+         followUserLocation = {false}
+         zoomEnabled = {true}
+      />
      
      
       </View>
       )}
      
-     {/* <MapView
-         style = {{height: 400,
-          marginTop: 80,}}
-         showsUserLocation = {false}
-         followUserLocation = {false}
-         zoomEnabled = {true}
-      /> */}
+     
     
       </View>
     );
