@@ -60,6 +60,11 @@ else{
   this.setState({showMapView:true})
 }
  
+removeWebView = ()=>
+{
+  this.setState({showMapView:false})
+}
+
 
 makeCall()
 {
@@ -182,6 +187,19 @@ makeCall()
          followUserLocation = {false}
          zoomEnabled = {true}
       />
+     
+     <TouchableOpacity style = {{width:40,height:40,position:'absolute'}}
+                          onPress = {this.removeWebView.bind(this)} 
+        >
+         <Image style = {{width:25,height:25,resizeMode:'contain',margin:8}}
+                source = {require('./../../images/Locateus/fancy_closebox.png')}
+
+         
+         > 
+
+          </Image> 
+        
+         </TouchableOpacity>
      
      
       </View>
