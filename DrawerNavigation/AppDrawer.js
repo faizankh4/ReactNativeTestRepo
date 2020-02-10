@@ -31,7 +31,7 @@ import HomeDafzascreen from './../TabBarClasses/HomeDafza';
 import ReachUsScreen from './../TabBarClasses/ReachUS/ReachUsFile'
 import EnquiryScreen from './../TabBarClasses/ReachUS/Enquiry'
 import LocateUSScreen from './../TabBarClasses/ReachUS/Locateus'
-
+import ContactUsScreen from './../TabBarClasses/ReachUS/ContactUS'
 const HomeStack = createStackNavigator({
  Home:{screen:HomeDafzascreen,
   navigationOptions:({navigation}) =>({
@@ -135,6 +135,24 @@ const SettingStack = createStackNavigator({
       },
      }),
   
+  },
+  ContactUsScreen:{screen:ContactUsScreen,
+    navigationOptions:({navigation}) =>({
+      // headerLeft: <NavigationDrawerStructure navigationProps={navigation} />,
+      
+      title:'CONTACT US',
+       headerStyle:{
+           backgroundColor:'rgba(15, 48, 72, 1.0)',
+       },
+      headerTintColor:'white',
+      headerTitleStyle:{
+          fontWeight: '500',
+          fontSize: 20,
+          fontStyle: 'normal',
+          color:'white',
+      },
+     }),
+  
   }
 
 
@@ -151,7 +169,7 @@ SettingStack.navigationOptions = ({navigation}) => {
   let tabBarVisible = true;
   let routeName = navigation.state.routes[navigation.state.index].routeName
 
-    if ( routeName == 'EnquiryScreen' || routeName === 'LocateUSScreen') {
+    if ( routeName == 'EnquiryScreen' || routeName === 'LocateUSScreen' || routeName === 'ContactUsScreen') {
         tabBarVisible = false
     }
 

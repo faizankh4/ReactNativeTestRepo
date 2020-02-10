@@ -61,9 +61,13 @@ export default class ReachUsFile extends Component {
      { 
      this.props.navigation.navigate('LocateUSScreen');
      }
-     else{
+     else  if (index === 1){
       this.props.navigation.navigate('EnquiryScreen'); 
      }
+     else  if (index === 3){
+      this.props.navigation.navigate('ContactUsScreen'); 
+     }
+    
     }
     
     

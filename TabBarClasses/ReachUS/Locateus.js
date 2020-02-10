@@ -36,7 +36,7 @@ export default class LocateUS extends Component {
       },
       {
         latitude: 25.25920633,
-        longitude: 5.37231809,
+        longitude: 55.372717,
       },
     ],
     coords: [],
@@ -48,7 +48,7 @@ export default class LocateUS extends Component {
   
   async getDirections(startLoc, destinationLoc) {
     try {
-        let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }&Key=GOOGLE_MAPS_APIKEY`)
+        let resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${ startLoc }&destination=${ destinationLoc }&Key=${GOOGLE_MAPS_APIKEY}`)
         let respJson = await resp.json();
         let points = Polyline.decode(respJson.routes[0].overview_polyline.points);
         let coords = points.map((point, index) => {
@@ -67,7 +67,7 @@ export default class LocateUS extends Component {
 componentDidMount()
 {
 
-  this.getDirections('28.5355, 77.3910','25.25920633, 5.37231809');
+  this.getDirections('28.5355, 77.3910','25.25920633, 55.372717');
 }
   
 
